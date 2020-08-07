@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CISDocument>
+<ApiHeader Optional="true">
+<OperationName/>
+<ClientID/>
+</ApiHeader>
+<GLTransactionTypeEnumVal/>
+<GLClassificationEnumVal/>
+<GLClassificationEnumVal/>
+<FreightBillNumber/>
+<CarrierCode/>
+<InvoiceNumber/>
+<CustomerCode>CBI</CustomerCode>
+<MaximumTransactionQuantity/>
+<MaximumVoucherQuantity/>
+</CISDocument>

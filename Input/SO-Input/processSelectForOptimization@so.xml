@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CISDocument>
+  <!--OpName=processSelectForOptimization , OpType=Request , PortType=TransportationManager-->
+  <ApiHeader Optional="true">
+    <OperationName Optional="true"/>
+    <ClientID Optional="true"/>
+  </ApiHeader>
+  <Criteria Optional="true">
+	<SystemPlanID Optional="true">30060605</SystemPlanID>
+  </Criteria>
+  <OptimizerInstanceGroupCode Optional="false">7778</OptimizerInstanceGroupCode>
+</CISDocument>

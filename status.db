@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<statusInfoDto>
+    <cononicalHostName>LP-5CD809BB4K.HCLT.CORP.HCL.IN</cononicalHostName>
+    <hostAddress>192.168.1.16</hostAddress>
+    <hostName>LP-5CD809BB4K</hostName>
+    <pid>12540</pid>
+    <port>5400</port>
+    <serverStatus>Running</serverStatus>
+    <startedTime></startedTime>
+    <userName>intakhabalam.s</userName>
+    <versionId>06032019-V-3.1</versionId>
+</statusInfoDto>

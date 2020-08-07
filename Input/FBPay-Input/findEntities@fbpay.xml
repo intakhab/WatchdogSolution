@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CISDocument>
+  <ApiHeader>
+    <OperationName></OperationName>
+    <ClientID></ClientID>
+  </ApiHeader>
+  <EntityType>FreightBillType</EntityType>
+  <Select>
+	<Name>FreightBillID</Name>
+  </Select>
+  <Filter>
+	<Name>FreightBillNumber</Name>
+	<Op>In</Op>
+  </Filter>
+</CISDocument>

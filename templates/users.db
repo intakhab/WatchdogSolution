@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<users>
+   <user id="1535828972538">
+      <email>dummy@gmail.com</email>
+      <username>Dummy</username>
+      <userpass>dummy</userpass>
+      <active>true</active>
+      <createdate>02-09-2018_00-39-32</createdate>
+   </user>
+</users>

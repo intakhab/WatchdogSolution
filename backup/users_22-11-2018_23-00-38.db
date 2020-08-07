@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<users>
+   <user id="1535828972538">
+      <email>admin@gmail.com</email>
+      <username>Admin</username>
+      <userpass>admin</userpass>
+      <active>true</active>
+      <createdate>02-09-2018_00-39-32</createdate>
+   </user>
+<user id="1536061650582">
+      <email>ias@gmail.com</email>
+      <username>Intakhab</username>
+      <userpass>admin</userpass>
+      <active>false</active>
+      <createdate>04-09-2018_17-17-30</createdate>
+   </user>
+<user id="1536327843731">
+      <email>shoni.sheikh@gmail.com</email>
+      <username>Soni</username>
+      <userpass>admin</userpass>
+      <active>false</active>
+      <createdate>07-09-2018_19-14-03</createdate>
+   </user>
+<user id="1536562832322">
+      <email>sejuti@gmail.com</email>
+      <username>Sejuti</username>
+      <userpass>admin</userpass>
+      <active>true</active>
+      <createdate>10-09-2018_12-30-32</createdate>
+   </user>
+<user id="1536565625972">
+      <email>mannu@gmail.com</email>
+      <username>Mannu</username>
+      <userpass>admin</userpass>
+      <active>true</active>
+      <createdate>10-09-2018_13-17-05</createdate>
+   </user>
+<user id="1536594061967">
+      <email>xyz@gmail.com</email>
+      <username>XYZ</username>
+      <userpass>admin</userpass>
+      <active>true</active>
+      <createdate>10-09-2018_21-11-01</createdate>
+   </user>
+</users>

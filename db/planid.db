@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PlanIds>
+   <PlanId id="30060603">
+      <PlanDescription>Auto_P2P/Bailment</PlanDescription>
+      <LogisticsGroupCode>W&amp;S</LogisticsGroupCode>
+      <DivisionCode>CBI</DivisionCode>
+      <CreatedDate>25-11-2018_00-22-55</CreatedDate>
+      <IsRun>0</IsRun>
+   </PlanId>
+</PlanIds>

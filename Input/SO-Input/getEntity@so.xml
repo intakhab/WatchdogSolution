@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CISDocument>
+	<!--OpName=getEntity , OpType=Request , PortType=TransportationManager -->
+	<ApiHeader>
+		<OperationName>getEntity</OperationName>
+	</ApiHeader>
+	<EntityType>PlanType</EntityType>
+	<Select>
+		<Name>SystemPlanID</Name>
+		<Name>PlanDescription</Name>
+		<Name>LogisticsGroupCode</Name>
+		<Name>DivisionCode</Name>
+	</Select>
+	<Id>30060601</Id>
+</CISDocument>
