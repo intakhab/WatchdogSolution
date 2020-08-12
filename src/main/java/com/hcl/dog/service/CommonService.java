@@ -61,7 +61,9 @@ import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.common.HTMLTemplate;
 import com.hcl.dog.component.DataLoaderComponent;
 import com.hcl.dog.config.PropertiesConfig;
+import com.hcl.dog.domain.DogErrorResponse;
 import com.hcl.dog.domain.Reports;
+import com.hcl.dog.dto.ErrorDto;
 import com.hcl.dog.dto.FileDto;
 import com.hcl.dog.dto.PlanDescriptionDto;
 import com.hcl.dog.dto.ReportDto;
@@ -312,20 +314,20 @@ public class CommonService {
 	public void scanDirectory() {
 		logger.info("Scanning all directory...");
 
-		createFolder(dataLoader.configDto.getInputFolderPath(), "Input");
-		createFolder(dataLoader.configDto.getOutputFolderPath(), "Output");
-		createFolder(dataLoader.configDto.getArchiveFolderPath(), "Archive");
-		createFolder(dataLoader.configDto.getFailureFolderPath(), "Failure");
+		AppUtil.createFolder(dataLoader.configDto.getInputFolderPath(), "Input");
+		AppUtil.createFolder(dataLoader.configDto.getOutputFolderPath(), "Output");
+		AppUtil.createFolder(dataLoader.configDto.getArchiveFolderPath(), "Archive");
+		AppUtil.createFolder(dataLoader.configDto.getFailureFolderPath(), "Failure");
 		//
-		createFolder(dataLoader.configDto.getOptInputFolderPath(), "Fin Input");
-		createFolder(dataLoader.configDto.getNonEdiCamInputFolderPath(), "NonEdi Input");
-		createFolder(dataLoader.configDto.getSoaOutputFolderPath(), "Fin SOA Folder");
+		AppUtil.createFolder(dataLoader.configDto.getOptInputFolderPath(), "Fin Input");
+		AppUtil.createFolder(dataLoader.configDto.getNonEdiCamInputFolderPath(), "NonEdi Input");
+		AppUtil.createFolder(dataLoader.configDto.getSoaOutputFolderPath(), "Fin SOA Folder");
 
-		createFolder(env.getProperty("backup.dir"), "Backup Folder");
-		createFolder("reports", "Reports");
-		createFolder(dataLoader.configDto.getSoOrderInputFolderPath(), "SO Folder");
-		createFolder(dataLoader.configDto.getFbPayInputFolderPath(), "FBPay");
-		createFolder(dataLoader.configDto.getBulkInputFolderPath(), "BULK");
+		AppUtil.createFolder(env.getProperty("backup.dir"), "Backup Folder");
+		AppUtil.createFolder("reports", "Reports");
+		AppUtil.createFolder(dataLoader.configDto.getSoOrderInputFolderPath(), "SO Folder");
+		AppUtil.createFolder(dataLoader.configDto.getFbPayInputFolderPath(), "FBPay");
+		AppUtil.createFolder(dataLoader.configDto.getBulkInputFolderPath(), "BULK");
 
 		//
 
@@ -385,27 +387,7 @@ public class CommonService {
 		}
 	}
 
-	/***
-	 * Will Create folder
-	 * 
-	 * @param path
-	 *            {@link String}
-	 * @param type
-	 *            {@link String}
-	 */
-	public void createFolder(String path, String type) {
-		File file = Paths.get(path).toFile();
-		if (!file.exists()) {
-			if (file.mkdir()) {
-				logger.info(type + " directory is created");
-
-			} else {
-				logger.error("Error: {Com-8888} Failed to create directory { " + type + " }");
-
-			}
-		}
-	}
-
+	
 	/**
 	 * This method will move file to destination dir, if exits then replace it
 	 * 
@@ -1341,6 +1323,28 @@ public class CommonService {
 	public String getMins(String commonArgs) {
 		long l = (AppUtil.MINS * Long.parseLong(commonArgs)) / 60;
 		return String.valueOf(l);
+	}
+     /***
+      * Introduce new method
+      * @param apiName {@link String}
+      * @param resFile {@link File}
+      * @return List
+      */
+	public ErrorDto buildErrorMsg(String apiName, File resFile) {
+		ErrorDto edto = new ErrorDto();
+		try {
+			DogErrorResponse errorResponse = (DogErrorResponse) xmlUtilService
+					.convertXMLToObject(DogErrorResponse.class, resFile);
+			edto.setCompletedStatus(errorResponse.getResponseHeader().getCompletedSuccessfully());
+			edto.setErrorCode(errorResponse.getResponseHeader().getError().getCode());
+			edto.setItem(errorResponse.getResponseHeader().getError().getItem());
+			edto.setServerity(errorResponse.getResponseHeader().getError().getSeverity());
+			edto.setSystemMessage(errorResponse.getResponseHeader().getError().getSystemMessage());
+			edto.setUserMessage(errorResponse.getResponseHeader().getError().getUserMessage());
+			edto.setEntityType(apiName);
+		} catch (Exception e) {
+		}
+		return edto;
 	}
 
 	/***********************************************/

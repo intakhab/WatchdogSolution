@@ -37,7 +37,7 @@
                 </button>
               </div>
             <div class="form-group" style="font-size: 12px;">
-               <span style="color:red;font-weight: bold;">\\/\/</span >atch<span style="color:blue;font-weight: bold;font-size: 15px">[|)</span>og<sup>®</sup> ©2018 Constellation Brands, Inc.
+               <span style="color:red;font-weight: bold;">\\/\/</span >atch<span style="color:blue;font-weight: bold;font-size: 15px">[|)</span>og<sup>®</sup> ©2020 Constellation Brands, Inc.
             </div>
         </form:form>
       </div>

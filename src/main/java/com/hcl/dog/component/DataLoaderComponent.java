@@ -1,8 +1,6 @@
 package com.hcl.dog.component;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBException;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.common.WatchDogException;
 import com.hcl.dog.dto.SettingsInfoDto;
 import com.hcl.dog.service.SettingsService;
@@ -109,35 +108,19 @@ public class DataLoaderComponent {
 	 * @throws WatchDogException
 	 */
 	private void validateDirectories() {
-		createFolder(configDto.getInputFolderPath(), "Input");
-		createFolder(configDto.getOutputFolderPath(), "Output");
-		createFolder(configDto.getArchiveFolderPath(), "Archive");
-		createFolder(configDto.getFailureFolderPath(), "Failure");
+		AppUtil.createFolder(configDto.getInputFolderPath(), "Input");
+		AppUtil.createFolder(configDto.getOutputFolderPath(), "Output");
+		AppUtil.createFolder(configDto.getArchiveFolderPath(), "Archive");
+		AppUtil.createFolder(configDto.getFailureFolderPath(), "Failure");
 		//
-		createFolder(configDto.getOptInputFolderPath(), "Fin Input");
-		createFolder(configDto.getSoaOutputFolderPath(), "Fin SOA");
-		createFolder(configDto.getNonEdiCamInputFolderPath(), "Non Edi");
-		createFolder(configDto.getSoOrderInputFolderPath(), "SO");
-		createFolder(configDto.getFbPayInputFolderPath(), "FBPay");
-		createFolder(configDto.getBulkInputFolderPath(), "BULK");
+		AppUtil.createFolder(configDto.getOptInputFolderPath(), "Fin Input");
+		AppUtil.createFolder(configDto.getSoaOutputFolderPath(), "Fin SOA");
+		AppUtil.createFolder(configDto.getNonEdiCamInputFolderPath(), "Non Edi");
+		AppUtil.createFolder(configDto.getSoOrderInputFolderPath(), "SO");
+		AppUtil.createFolder(configDto.getFbPayInputFolderPath(), "FBPay");
+		AppUtil.createFolder(configDto.getBulkInputFolderPath(), "BULK");
 		//
 		logger.info("Validated directories pass {} ");
 	}
-   /**
-    * @see DataLoaderComponent
-    * @param path
-    * @param type
-    */
-	private void createFolder(String path, String type) {
-		File file = Paths.get(path).toFile();
-		if (!file.exists()) {
-			if (file.mkdir()) {
-				logger.info(type + " directory is created!");
-
-			} else {
-				logger.error("Failed to create directory!");
-
-			}
-		}
-	}
+ 
 }

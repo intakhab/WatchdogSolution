@@ -1,10 +1,15 @@
 package com.hcl.dog.common;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.hcl.dog.dto.MailDto;
 /***
@@ -13,6 +18,7 @@ import com.hcl.dog.dto.MailDto;
  * @see {@link MailDto}
  */
 public class AppUtil {
+	private static final Logger logger = LogManager.getLogger("util");
 
 	
 	public static final String COMMA_SEPERATOR = ",";
@@ -145,4 +151,26 @@ public class AppUtil {
 		}
 		return false;
 	}
+	
+	
+	/***
+	 * Will Create folder
+	 * 
+	 * @param path
+	 *            {@link String}
+	 * @param type
+	 *            {@link String}
+	 */
+	public static void createFolder(String path, String type) {
+		File file = Paths.get(path).toFile();
+		if (!file.isDirectory()) {
+			    file.mkdirs();
+				logger.info(type + " directory is created");
+
+			} else {
+				logger.error("Error: {Com-8888} Failed to create directory { " + type + " }");
+
+			}
+	}
+
 }

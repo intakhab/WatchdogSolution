@@ -10,15 +10,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DogError {
 	
 	@XmlElement
-	private String Severity;
+	private String Severity="";
 	@XmlElement
-	private String Item;
+	private String Item="";
 	@XmlElement
-	private String UserMessage;
+	private String UserMessage="";
 	@XmlElement
-	private String Code;
+	private String Code="";
 	@XmlElement
-	private String SystemMessage;
+	private String SystemMessage="";
 	
 	
 	public String getSeverity() {

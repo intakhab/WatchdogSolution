@@ -16,6 +16,6 @@
 <br/>
 <div id="footer" class="footer navbar-inverse">
 		<p class="footer-block">
-              ©2018 Constellation Brands, Inc.
+              ©2020 Constellation Brands, Inc.
 		</p>
 </div>

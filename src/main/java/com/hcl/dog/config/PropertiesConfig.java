@@ -35,6 +35,8 @@ public class PropertiesConfig {
 	//public String versionId="10022019-V-2.9";// Plan not found modified bugs fixed
 	//public String versionId="13022019-V-3.0";// Plan not found modified bugs fixed logger change
 	
-	public String versionId="06032019-V-3.1";// PlanID Empty-mail shoot
+	//public String versionId="06032019-V-3.1";// PlanID Empty-mail shoot
+	
+	public String versionId="10082020-V-3.3";// PlanID Failure mail shoot
 		
 }

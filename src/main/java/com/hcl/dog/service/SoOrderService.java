@@ -94,6 +94,7 @@ public class SoOrderService {
 								}
 							}
                        }else {
+   						  api.setMailDescription("PlanIds {null} SO Batch Optimization won't run {} ");
    						  logger.info("PlanIds {0} SO Batch Optimization won't run {} ");
 
                        }

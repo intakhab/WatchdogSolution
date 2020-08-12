@@ -1,12 +1,9 @@
 package com.hcl.dog.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.JAXBException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +15,6 @@ import org.springframework.util.StringUtils;
 import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.common.WatchDogException;
 import com.hcl.dog.component.DataLoaderComponent;
-import com.hcl.dog.domain.DogErrorResponse;
 import com.hcl.dog.dto.ErrorDto;
 import com.hcl.dog.dto.ResponseDto;
 /***
@@ -413,25 +409,13 @@ public class FileService {
 	 */
 	private boolean errorService(File inputFile,File responseFile,String entityType) throws WatchDogException {
 		
-		ErrorDto edto=new ErrorDto();
+		ErrorDto edto=null;
 		try {
-			DogErrorResponse errorResponse = (DogErrorResponse) xmlUtilService.
-					convertXMLToObject(DogErrorResponse.class, responseFile);
-				edto.setCompletedStatus(errorResponse.getResponseHeader().getCompletedSuccessfully());
-				edto.setErrorCode(errorResponse.getResponseHeader().getError().getCode());
-				edto.setItem(errorResponse.getResponseHeader().getError().getItem());
-				edto.setServerity(errorResponse.getResponseHeader().getError().getSeverity());
-				edto.setSystemMessage(errorResponse.getResponseHeader().getError().getSystemMessage());
-				edto.setUserMessage(errorResponse.getResponseHeader().getError().getUserMessage());
-				edto.setEntityType(entityType);
-			
+			edto=commonService.buildErrorMsg(entityType,responseFile);
 			errorList.add(edto);
 			
-		} catch (FileNotFoundException e) {
-			logger.error("FileNotFoundException in errorService{} ",e);
-
-		} catch (JAXBException e) {
-			logger.error("JAXBException in errorService{} ",e);
+		} catch (Exception e) {
+			logger.error("Error in errorService{} ",e);
 
 		}
 		// SO File PlanID not found logic written here....

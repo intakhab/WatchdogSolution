@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import com.hcl.dog.common.HTMLTemplate;
+
 /***
  * 
- * @author intakhabalam.s@hcl.com
- * Main Application Entry point
+ * @author intakhabalam.s@hcl.com Main Application Entry point
  * @see java.lang.Object
  * @See {@link SpringApplication}
  * @see {@link EnableScheduling}
@@ -27,37 +27,36 @@ import com.hcl.dog.common.HTMLTemplate;
 public class WatchDogSolution {
 
 	private static String[] args;
-	
+
 	/***
 	 * 
 	 * @param args as string array
-	 * @see SpringApplication 
-	   @see ApplicationPidFileWriter
-	   @see ConfigurableApplicationContext
+	 * @see SpringApplication
+	 * @see ApplicationPidFileWriter
+	 * @see ConfigurableApplicationContext
 	 */
 	public static void main(String[] args) {
 
 		WatchDogSolution.args = args;
-		ConfigurableApplicationContext application =SpringApplication.run(WatchDogSolution.class, args);
+		ConfigurableApplicationContext application = SpringApplication.run(WatchDogSolution.class, args);
 		application.addApplicationListener(new ApplicationPidFileWriter());
 	}
-	
+
 	/***
-	 * Re-Starting 
-	 * the application
+	 * Re-Starting the application
+	 * 
 	 * @param ctx as ConfigurableApplicationContext
 	 * @see SpringApplication
 	 */
 	public static void restart(ConfigurableApplicationContext ctx) {
-	    // close previous context
+		// close previous context
 		ctx.close();
-	    // and build new one
-	    SpringApplication.run(WatchDogSolution.class, args);
+		// and build new one
+		SpringApplication.run(WatchDogSolution.class, args);
 	}
-	
+
 	@Bean
 	public void invokeBanner() {
 		HTMLTemplate.startBanner();
 	}
 }
-

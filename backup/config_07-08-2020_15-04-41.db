@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <DogInfoConfiguration>
     <dogId>1</dogId>
-    <batchFilePath>C:/dataload/TMAPIBatch/BatchFile/watchDog.bat</batchFilePath>
-    <inputFolderPath>C:/dataload/TMAPIBatch/Input1</inputFolderPath>
-    <outputFolderPath>C:/dataload/TMAPIBatch/Output1</outputFolderPath>
-    <failureFolderPath>C:/dataload/TMAPIBatch/Failure1</failureFolderPath>
-    <archiveFolderPath>C:/dataload/TMAPIBatch/Archive1</archiveFolderPath>
+    <batchFilePath>c:/dataload/TMAPIBatch/BatchFile/process.bat</batchFilePath>
+    <inputFolderPath>c:/dataload/TMAPIBatch/Input1</inputFolderPath>
+    <outputFolderPath>c:/dataload/TMAPIBatch/Output1</outputFolderPath>
+    <failureFolderPath>c:/dataload/TMAPIBatch/Failure1</failureFolderPath>
+    <archiveFolderPath>c:/dataload/TMAPIBatch/Archive1</archiveFolderPath>
     <carrierCodeTag>CarrierCode</carrierCodeTag>
     <responeCodeTag>CompletedSuccessfully</responeCodeTag>
     <fileExtension>xml</fileExtension>
@@ -23,7 +23,7 @@
     <nonEdiCamSupportsAPI>G1-findEntities_processSetStopToDelivered@{SystemLoadID=READ_PUT|CarrierCode=READ_PUT}</nonEdiCamSupportsAPI>
     <nonEdiCamWineFileSupports>wine</nonEdiCamWineFileSupports>
     <nonEdiCamWineSupportsAPI>W1-findEntities_processStopConfirm@{SystemLoadID=READ_PUT},W2-findEntities_processSetStopToDelivered@{SystemLoadID=READ_PUT|CarrierCode=READ_PUT}</nonEdiCamWineSupportsAPI>
-    <toWhomEmail>intakhab.siddiqui@cbrands.com</toWhomEmail>
+    <toWhomEmail>intakhabalam.s@hcl.com</toWhomEmail>
     <enableArchiveOthersFile>false</enableArchiveOthersFile>
     <enableResponseCodeLog>false</enableResponseCodeLog>
     <enableMail>true</enableMail>
@@ -60,11 +60,11 @@
     </xcronConfig>
     <xmailConfig>
         <debugMail>true</debugMail>
-        <fromMail>noreply@cbrands.com</fromMail>
-        <host>mail.cbrands.com</host>
-        <password></password>
-        <port>25</port>
-        <username>noreply@cbrands.com</username>
+        <fromMail>mail.from.watchdog@gmail.com</fromMail>
+        <host>smtp.gmail.com</host>
+        <password>mailfromwatchdog@123</password>
+        <port>587</port>
+        <username>mail.from.watchdog@gmail.com</username>
     </xmailConfig>
     <autoPilot>true</autoPilot>
     <autoPilotCron>00 00 06 * * *</autoPilotCron>

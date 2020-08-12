@@ -174,4 +174,16 @@
       <description>Response xml not got from TMS</description>
       <status>FAIL</status>
    </report>
+<report id="1596828486089">
+      <filename>processShipmentOrderCreate@SO_SO13960567_1.xml</filename>
+      <filedat>08-08-2020_00-58-06</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
+   </report>
+<report id="1597054512994">
+      <filename>processShipmentOrderCreate@SO_SO13960567_1.xml</filename>
+      <filedat>10-08-2020_15-45-12</filedat>
+      <description>Passed</description>
+      <status>PASS</status>
+   </report>
 </reports>

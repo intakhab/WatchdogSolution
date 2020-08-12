@@ -35,15 +35,8 @@
 				<i class="fa fa-home" aria-hidden="true"></i> Status</a></li>
 				<!-- <li id="tab2"><a href="configfile" title="Setting configuation for application run">
 				<i class="fa fa-cog" aria-hidden="true"></i> Settings </a></li> -->
-				<li class="dropdown" id="tab2">
-			        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" title="Show Input Folder">
-			        <i class="fa fa-cog" aria-hidden="true"></i> Settings
-			        <span class="caret"></span></a>
-			        <ul class="dropdown-menu mfont">
-			          <li><a href="configfile"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; System Config </a></li>
-			          <li><a href="h2database"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; DB Config </a></li>
-			        </ul>
-			     </li>
+				<li id="tab2"><a href="configfile" title="Setting configuation for application run">
+				<i class="fa fa-cog" aria-hidden="true"></i> Settings </a></li>
 				
 				<li class="dropdown" id="tab3">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" title="Incoming Files Input Folder Structure">
@@ -98,7 +91,7 @@
 				          <li><a href="logout"  title="Logout"><i class="fa fa-sign-out" aria-hidden="true" style="color: red;font-size:15px;"></i>&nbsp; Logout&nbsp;&nbsp;</a></li>
 				          <li><a href="reguser" title="Registration of user"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Add User</a></li>
 				          <li><a href="showusers" title="All users"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Show User</a></li>
-				          <!-- <li><a href="javascript:void(0)" onclick="restoreUsers()" title="Restore users"><i class="fa fa-window-restore" aria-hidden="true"></i>&nbsp;&nbsp; Restore User</a></li> -->
+				          <li><a href="javascript:void(0)" onclick="restoreUsers()" title="Restore users"><i class="fa fa-window-restore" aria-hidden="true"></i>&nbsp;&nbsp; Restore User</a></li>
 				        </ul>
 			      </li>
 			</ul>

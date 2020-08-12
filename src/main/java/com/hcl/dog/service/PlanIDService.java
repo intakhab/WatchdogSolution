@@ -3,6 +3,7 @@ package com.hcl.dog.service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.common.WatchDogException;
@@ -21,6 +23,7 @@ import com.hcl.dog.domain.PlanId;
 import com.hcl.dog.domain.PlanIds;
 import com.hcl.dog.domain.SOPlan;
 import com.hcl.dog.domain.SoSystemPlanId;
+import com.hcl.dog.dto.ErrorDto;
 import com.hcl.dog.dto.PlanDescriptionDto;
 import com.hcl.dog.dto.ResponseDto;
 /**
@@ -43,6 +46,9 @@ public class PlanIDService {
 	private DataLoaderComponent dataLoader;
     private final String SO_FILE="@so.xml";
 	private PlanDescriptionDto planDesDto=PlanDescriptionDto.getInstance();
+	
+	@Autowired
+	private PrepMailService prepMailService;
 
 	/***
 	 * This method will check the plan id from SO file. 
@@ -61,11 +67,13 @@ public class PlanIDService {
 			logger.error("PlanId not found in this file => "+inputFile.getName());
 			return;
 		}
+		planId=StringUtils.trimLeadingWhitespace(planId);
+		
 		logger.info("PlanId found [ "+planId+" ]  for file => "+inputFile.getName());
 		//Before Saving PlanId, I need to get the description of plan id
 		 boolean b=callPlanDescription(planId.trim());
 		 if(!b) {
-			  logger.info("PlanId will not go for auto optimization call");
+			  logger.info("PlanId will not go for auto optimization call, Pls check response file from output folder");
 			  return;
 		 }
 		try {
@@ -177,7 +185,15 @@ public class PlanIDService {
 			xmlUtilService.printXML(resFile);
 			if (AppUtil.TRUE_STR.equalsIgnoreCase(responseTagVal)) {
 				b=readSystemPlanIds(responeFile);
-			} 
+			}else {
+				//New mailing change
+				List<ErrorDto> errorList=new ArrayList<>(0);
+				ErrorDto edto=commonService.buildErrorMsg(apiName,resFile);
+				errorList.add(edto);
+				// Added for plan id error
+				prepMailService.sendXMail(apiInputFile, errorList);// Added on 10-08-2020
+
+			}
 		} catch (Exception e) {
 			throw new WatchDogException("Error: {PlanIDs-0003} :   {checkResponseCode} " + e.getMessage());
 		}
@@ -196,8 +212,8 @@ public class PlanIDService {
 		try {
 			SoSystemPlanId sysPlanIds=(SoSystemPlanId)	xmlUtilService
 					.convertXMLToObject(SoSystemPlanId.class,Paths.get(responeFile).toFile());
-			SOPlan  soPlan=sysPlanIds.getEntity().getPlan();
-			if(soPlan!=null) {
+			if(sysPlanIds!=null && sysPlanIds.getEntity()!=null) {
+				SOPlan  soPlan=sysPlanIds.getEntity().getPlan();
 				
 				logger.info("SystemPlanID :: "+soPlan.getSystemPlanID());
 				logger.info("PlanDescription :: "+soPlan.getPlanDescription());
@@ -214,6 +230,8 @@ public class PlanIDService {
 					planDesDto.planDescription=soPlan.getPlanDescription();
 					return true;
 				}
+			}else{
+				logger.info("Please check the output plan id does not found");
 			}
 			
 		} catch (Exception e) {
