@@ -274,11 +274,13 @@
 						 	</div>
 							<br> 
 					    </div>
+					       <!--  CLosed as per requiest
+					       
 					        <nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li><a href="javascript:void()"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Wine Configuration </a></li>
 									</ol>
-					    	</nav>
+					    	</nav> 
 							 <div class="form-group">
 								<label for="nonEdiCamFolderPath">File Supports</label>
 								<form:input path="nonEdiCamWineFileSupports" class="form-control" id="nonEdiCamWineFileSupportsId" placeholder="Wine File Supports"
@@ -330,7 +332,7 @@
 								</div>
 						 	</div>
 							<br> 
-					    </div>
+					    </div>-->
 					<br> 
 					<br> 
                   </div>

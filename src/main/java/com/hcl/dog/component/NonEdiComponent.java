@@ -63,20 +63,18 @@ public class NonEdiComponent {
      * @see Bean
      * @return NonEdi Wine 1 {@link String}
      */
-	@Bean
-	public String nonEdiWineBatchW1() {
-		return commonService.
-				getMins(dataLoader.configDto.getNonEdiPoollingTimeW1());
-	}
+	/*
+	 * @Bean public String nonEdiWineBatchW1() { return commonService.
+	 * getMins(dataLoader.configDto.getNonEdiPoollingTimeW1()); }
+	 */
     /**
      * @see Bean
      * @return NonEdi Wine2 {@link String}
      */
-	@Bean
-	public String nonEdiWineBatchW2() {
-		return commonService.
-				getMins(dataLoader.configDto.getNonEdiPoollingTimeW2());
-	}
+	/*
+	 * @Bean public String nonEdiWineBatchW2() { return commonService.
+	 * getMins(dataLoader.configDto.getNonEdiPoollingTimeW2()); }
+	 */
 	 
 	/*****
 	 * This is for Non Edi Carrier
@@ -142,9 +140,13 @@ public class NonEdiComponent {
 	/****
 	 * Wine Group G1
 	 * @see Scheduled
+	 * Removed as pe Brij request// if neeed to open the at UI part also need to be enabled
 	 */
 	
-	@Scheduled(fixedRateString = "#{@nonEdiWineBatchW1}", initialDelayString = "120000")
+	/*
+	 * @Scheduled(fixedRateString = "#{@nonEdiWineBatchW1}", initialDelayString =
+	 * "120000")
+	 */
 	public void invokeNonEdiWineRunW1() {
 		// validate before execution of program.
 		if(!validate()) {
@@ -206,7 +208,10 @@ public class NonEdiComponent {
 	 * Wine Group G2
 	 * @see Scheduled
 	 */
-	@Scheduled(fixedRateString = "#{@nonEdiWineBatchW2}", initialDelayString = "360000")
+	/*
+	 * @Scheduled(fixedRateString = "#{@nonEdiWineBatchW2}", initialDelayString =
+	 * "360000")
+	 */
 	public void invokeNonEdiRunW2() {
 		// validate before execution of program.
 		if(!validate()) {
