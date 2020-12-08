@@ -1,5 +1,7 @@
 package com.hcl.dog.component;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
 
@@ -14,14 +16,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.hcl.WatchDogSolution;
+import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.dto.MailDto;
 import com.hcl.dog.service.PrepMailService;
 import com.hcl.dog.service.CommonService;
 
 /***
  * @author intakhabalam.s@hcl.com
+ * Auto Pilot will restart WatchDog automatically and copy the all files from archive, output and failure folder 
+ * from respective directory and archive in temp folder in zip format due to smooth run of watchdog
  * @see ApplicationContext {@link ApplicationContext} 
- * @see Component
+ * @see Component {@link Component}
  * @see DataLoaderComponent {@link AutoPilotComponent} 
  * @see PrepMailService {@link PrepMailService}
  * @see CommonService {@link CommonService}
@@ -46,6 +51,8 @@ public class AutoPilotComponent {
 	@Autowired
 	private Environment env;
 
+	
+	private final String CLEAN_UP_FOLDER_NAME="Temp";
 
 	@Bean
 	public String autoPilotCron() {
@@ -61,7 +68,6 @@ public class AutoPilotComponent {
 			return;
 		}
 		
-		
 		final long startTime = System.currentTimeMillis();
 		logger.info("=======================================================================");
 		logger.info("Auto Pilot Starting Time [ " + LocalTime.now() + " ]");
@@ -72,8 +78,33 @@ public class AutoPilotComponent {
 			        } catch (InterruptedException ignored) {
 			       }
 				commonService.loadRerorts(env.getProperty("reports.path"));
+				
 				//
 		try {
+			// Backup all file in particular folder....
+			try {
+				if(AppUtil.TRUE_STR.equalsIgnoreCase(env.getProperty("auto.pilot.folder.cleanup"))) {
+				Path pp=Paths.get(dataLoader.configDto.getInputFolderPath());
+				String tempFolder=pp.getRoot()+""+pp.subpath(0, 2)+"/"+CLEAN_UP_FOLDER_NAME;
+				logger.info("TempFolder path==>"+tempFolder);
+				AppUtil.createFolder(tempFolder,CLEAN_UP_FOLDER_NAME);
+				Path [] sPath = {
+						Paths.get(dataLoader.configDto.getOutputFolderPath()),
+						Paths.get(dataLoader.configDto.getArchiveFolderPath()),
+						Paths.get(dataLoader.configDto.getFailureFolderPath())
+						};
+				
+				AppUtil.zipFolder(tempFolder, sPath);
+				logger.info("Clean Up Completed - All file archive to folder : "+CLEAN_UP_FOLDER_NAME);
+
+				}else {
+					logger.info("Auto Pilot Cleanup functionality is disabled, for enable change in properties file");
+				}
+			}catch(Exception e) {
+				logger.error("Clean error {}", e);
+
+			}
+			
 			ConfigurableApplicationContext ctx=(ConfigurableApplicationContext) context;
 			 Thread restartThread = new Thread(() -> {
 			        try {
@@ -89,6 +120,8 @@ public class AutoPilotComponent {
 
 		} catch (Exception ex) {
 			logger.error("Auto Pilot run into an error {WatchDog Exception}", ex);
+		}finally {
+			//backup all 
 		}
 		final long endTime = System.currentTimeMillis();
 		final double totalTimeTaken = (endTime - startTime) / (double) 1000;

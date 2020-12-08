@@ -18,6 +18,7 @@ import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.common.EmailTemplate;
 import com.hcl.dog.component.DataLoaderComponent;
 import com.hcl.dog.config.PropertiesConfig;
+import com.hcl.dog.domain.Report;
 import com.hcl.dog.dto.APIDto;
 import com.hcl.dog.dto.ErrorDto;
 import com.hcl.dog.dto.MailDto;
@@ -61,6 +62,8 @@ public class PrepMailService{
 		mailDto.setMessage(message);
 		mailDto.setHtml(true);
 		emailService.send(mailDto);
+		
+
 	}
 	
 	
@@ -109,6 +112,35 @@ public class PrepMailService{
 		}
 		sb.append("</table>");
    	    sendAPIsMail(sb.toString(), type);
+		
+	}
+	/***
+	 * @param List<Report> reportsList
+	 * @param mDto MailDto
+	 */
+	public void prepareReportsAndSend(List<Report> reportsList,MailDto mDto) {
+		StringBuilder sb = new StringBuilder(AppUtil.EMPTY_STR);
+		
+		sb.append(
+				"<table border='1' cellpadding='10' style='border: 1px solid #000080;' width='100%'><tr bgcolor='#A9A9A9'>"
+				+ "<td> SNO </td><td> FILE NAME </td><td>  DESCRIPTION </td> <td> DATE </td> <td> STATUS </td></tr>");
+		int index=1;
+		for (Report r : reportsList) {
+			String statusStr = r.status.equalsIgnoreCase("PASS") ? "<span style='color:green'> Passed </span>" : "<span style='color:red'>Failed</span>";
+			
+			String toMailContent = "<tr><td>" + index + "</td><td>" + r.getFilename() + "</td><td>" + r.getDescription() + "</td><td>"+r.getFiledat()+"</td><td>" + statusStr + "</td></tr>";
+			sb.append(toMailContent);
+			index++;
+		}
+		sb.append("</table>");
+		mDto.setMessage(sb.toString());
+		try {
+			sendEmailTemplate(mDto);
+			logger.info("Reports Email Sent successfully.");
+		} catch (Exception e) {
+			logger.error("Error: {Com-Reports} Problem in sending email {} " + e.getMessage());
+
+		}
 		
 	}
 	/***

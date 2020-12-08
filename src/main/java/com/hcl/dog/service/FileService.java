@@ -71,7 +71,7 @@ public class FileService {
 					// IF valid file name found then calling command line batch
 					if (isValidFile) {
 						// we are checking so file having PlanIds exits are not 
-						 checkPlanIdsExistInSoFile(inputFile);
+						checkPlanIdsExistInSoFile(inputFile);
 						
 						ResponseDto responseDto=commonService.runCommandLineBatch(dataLoader.configDto.getBatchFilePath(),
 								createCommandArgs(fileName),fileName);
@@ -274,12 +274,31 @@ public class FileService {
     * @return {@link Boolean}
     */
 	private boolean modifyPlanId(File inputFile) {
+		String planNotFoundCode=checkPanNotFoundCode(inputFile);//Suspicious code has been written need to check
+		if(planNotFoundCode!=null &&  env.getProperty("plan.not.found.code").equals(planNotFoundCode)) {
+			 logger.info("PlanId already modified in current file with current code-"+ env.getProperty("plan.not.found.code"));
+			 return false;
+		}
 		 logger.info("PlanId modifying in current file");
 		 boolean isModified=xmlUtilService.modifyValuesInXML(inputFile, AppUtil.SYSTEM_PLAN_ID, env.getProperty("plan.not.found.code"));
 		   if(!isModified) {
 			   isModified=xmlUtilService.modifyValuesInXML(inputFile, AppUtil.TNS_SYSTEM_PLAN_ID, env.getProperty("plan.not.found.code"));
 		   }
 		return isModified;
+	}
+	
+	/***
+	 * This method will check plan not found code is already exist or not
+	 * @param inputFile input file
+	 * @return String value 999
+	 */
+	private String checkPanNotFoundCode(File inputFile) {
+		 String sysemPlanId = xmlUtilService.getValueFromXML(inputFile,AppUtil.SYSTEM_PLAN_ID);
+		 if(null==sysemPlanId) {
+			 sysemPlanId=xmlUtilService.getValueFromXML(inputFile,AppUtil.TNS_SYSTEM_PLAN_ID);
+		 }
+		
+		return sysemPlanId;
 	}
 
 

@@ -1,6 +1,5 @@
 package com.hcl.dog.common;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.nio.file.Paths;
 

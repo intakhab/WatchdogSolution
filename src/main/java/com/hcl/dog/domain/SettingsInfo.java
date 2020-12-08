@@ -3,8 +3,10 @@ package com.hcl.dog.domain;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * This Class is main configuration container.
+ * 
  * @author intakhabalam.s@hcl.com
  *
  */
@@ -12,56 +14,74 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsInfo {
 
-	private String dogId="";
-	private String batchFilePath="";
-	private String inputFolderPath="";
-	private String outputFolderPath="";
-	private String failureFolderPath="";
-	private String archiveFolderPath="";
+	private String dogId = "";
+	private String batchFilePath = "";
+	private String inputFolderPath = "";
+	private String outputFolderPath = "";
+	private String failureFolderPath = "";
+	private String archiveFolderPath = "";
 	private String carrierCodeTag = "CarrierCode";
 	private String responeCodeTag = "CompletedSuccessfully";
 	private String fileExtension = "xml";
 	private String fileTypeSeparator = "@";
 	private String responseFilePrefix = "Out_";
-	private String fileSupports="";
-	private String supportsAPI="";
+	private String fileSupports = "";
+	private String supportsAPI = "";
 	private String dogType = "FD";
-	private String optInputFolderPath="";
-	private String soaOutputFolderPath="";
-	private String optFileSupports="";
-	private String optSupportsAPI="";
-	private String nonEdiCamFileSupports="";
-    private String nonEdiCamInputFolderPath="";
-	private String nonEdiCamSupportsAPI="";
-	private String nonEdiCamWineFileSupports="";
-	private String nonEdiCamWineSupportsAPI="";
-	private String toWhomEmail="";
+	private String optInputFolderPath = "";
+	private String soaOutputFolderPath = "";
+	private String optFileSupports = "";
+	private String optSupportsAPI = "";
+	private String nonEdiCamFileSupports = "";
+	private String nonEdiCamInputFolderPath = "";
+	private String nonEdiCamSupportsAPI = "";
+	private String nonEdiCamWineFileSupports = "";
+	private String nonEdiCamWineSupportsAPI = "";
+	private String toWhomEmail = "";
 	private boolean enableArchiveOthersFile = false;
 	private boolean enableResponseCodeLog = false;
 	private boolean enableMail = false;
 	private boolean flag = false;
-	private boolean stopFileRun=false;
-	private boolean stopBatchRun=false;
-	private boolean stopNonEdiBatchRun=false;
-	private String limitFilesFolder="100";
-	private boolean stopSoBatchRun=false;
-	private String soOrderInputFolderPath="";
-	private String soOrderSupportsAPI="";
-	private boolean enableStartupEmail=false;
-	private boolean enableShutdownEmail=false;
-	private String fbPayFileSupports="";
-	private String fbPayInputFolderPath="";
-	private String fbPaySupportsAPI="";
-	private boolean stopBulkBatchRun=false;
-	private String bulkSupportsAPI="";
-	private String bulkFileSupports="";
-	private String bulkInputFolderPath="";
-	private CronConfig xcronConfig=new CronConfig();
-	private MailConfig xmailConfig=new MailConfig();
-    private boolean autoPilot=false;
-	private String autoPilotCron="";
-	
-	
+	private boolean stopFileRun = false;
+	private boolean stopBatchRun = false;
+	private boolean stopNonEdiBatchRun = false;
+	private boolean stopFBPayRun = false;
+	private String limitFilesFolder = "100";
+	private boolean stopSoBatchRun = false;
+	private String soOrderInputFolderPath = "";
+	private String soOrderSupportsAPI = "";
+	private boolean enableStartupEmail = false;
+	private boolean enableShutdownEmail = false;
+	private String fbPayFileSupports = "";
+	private String fbPayInputFolderPath = "";
+	private String fbPaySupportsAPI = "";
+	private boolean stopBulkBatchRun = false;
+	private String bulkSupportsAPI = "";
+	private String bulkFileSupports = "";
+	private String bulkInputFolderPath = "";
+	private CronConfig xcronConfig = new CronConfig();
+	private MailConfig xmailConfig = new MailConfig();
+	private boolean autoPilot = false;
+	private String autoPilotCron = "";
+
+	private boolean autoReports = false;
+	private String reportsCron = "";
+
+	public boolean isAutoReports() {
+		return autoReports;
+	}
+
+	public void setAutoReports(boolean autoReports) {
+		this.autoReports = autoReports;
+	}
+
+	public String getReportsCron() {
+		return reportsCron;
+	}
+
+	public void setReportsCron(String reportsCron) {
+		this.reportsCron = reportsCron;
+	}
 	public String getDogType() {
 		return dogType;
 	}
@@ -254,6 +274,7 @@ public class SettingsInfo {
 	public void setOptSupportsAPI(String optSupportsAPI) {
 		this.optSupportsAPI = optSupportsAPI;
 	}
+
 	public boolean isStopFileRun() {
 		return stopFileRun;
 	}
@@ -445,5 +466,13 @@ public class SettingsInfo {
 	public void setStopBulkBatchRun(boolean stopBulkBatchRun) {
 		this.stopBulkBatchRun = stopBulkBatchRun;
 	}
-	
+
+	public boolean isStopFBPayRun() {
+		return stopFBPayRun;
+	}
+
+	public void setStopFBPayRun(boolean stopFBPayRun) {
+		this.stopFBPayRun = stopFBPayRun;
+	}
+
 }

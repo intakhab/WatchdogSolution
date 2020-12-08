@@ -1,13 +1,27 @@
 package com.hcl.dog.common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +33,6 @@ import com.hcl.dog.dto.MailDto;
  */
 public class AppUtil {
 	private static final Logger logger = LogManager.getLogger("util");
-
-	
 	public static final String COMMA_SEPERATOR = ",";
 	public static final String EMPTY_STR = "";
 	public static final String WHITE_SPACE = "\\s";
@@ -40,7 +52,9 @@ public class AppUtil {
 	
 	public static final String PLAN_NOT_FOUND_CODE="999";
 
-	public final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+	public final static SimpleDateFormat dfDDMMYYYYhhmmss = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+	public final static SimpleDateFormat dfYYYYMMDD= new SimpleDateFormat("yyyy-MM-dd");
+
 
 	public static final String CLOSE_BANNER = "\n\n __        __          _            _         ____                       ____   _                 _                 \r\n"
 			+ " \\ \\      / /   __ _  | |_    ___  | |__     |  _ \\    ___     __ _     / ___| | |   ___    ___  (_)  _ __     __ _ \r\n"
@@ -81,15 +95,39 @@ public class AppUtil {
 
 	public static  String STARTED_TIME = "";
 
-	
+	/**
+	 * @param date {@link String}
+	 * @return {@link long}
+	 */
+	public static String dateDifference(String date) {
+		LocalDate currDate = LocalDate.now();
+		LocalDate endDate = LocalDate.parse(dateParseInYYYMMDD(date));
+		return ""+ChronoUnit.DAYS.between(endDate, currDate);
+	}
+
+	/***
+	 * @param dateString
+	 * @return {@link String}
+	 */
+	public static String dateParseInYYYMMDD(String dateString) {
+		Date date;
+		try {
+			date = (Date) dfDDMMYYYYhhmmss.parse(dateString);
+			return dfYYYYMMDD.format(date);
+		} catch (ParseException e) {
+			logger.error("Date Parsing error {} " + e);
+
+		}
+		return null;
+
+	}
 	
 	/**
 	 * This method will give YYYY-DD-MM and Hrs
-	 * 
 	 * @return time
 	 */
 	public static String currentTime() {
-		return dateFormat.format(new Date());
+		return dfDDMMYYYYhhmmss.format(new Date());
 	}
 	/***
 	 * @param listOfItems {@link List}
@@ -109,7 +147,6 @@ public class AppUtil {
 
 		return sb.toString();
 	}
-	
 	
 	
 	/***
@@ -168,9 +205,57 @@ public class AppUtil {
 				logger.info(type + " directory is created");
 
 			} else {
-				logger.error("Error: {Com-8888} Failed to create directory { " + type + " }");
-
+				logger.info(" { " + type + " } directory is already present");
 			}
+	}
+	
+	/***
+	 * @param source {@link Path}
+	 * @param tempFolder {@link String}
+	 * @throws IOException 
+	 */
+	public static void zipFolder(String tempFolder, Path... sPath) {
+		for (Path source : sPath) {
+			// get folder name as zip file name
+			String zipFileName = tempFolder + "\\" + source.getFileName().toString() + "_" + currentTime() + ".zip";
+			try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFileName))) {
+				Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
+					@Override
+					public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException {
+
+						// only copy files, no symbolic links
+						if (attributes.isSymbolicLink()) {
+							return FileVisitResult.CONTINUE;
+						}
+						try (FileInputStream fis = new FileInputStream(file.toFile())) {
+							Path targetFile = source.relativize(file);
+							zos.putNextEntry(new ZipEntry(targetFile.toString()));
+							byte[] buffer = new byte[1024];
+							int len;
+							while ((len = fis.read(buffer)) > 0) {
+								zos.write(buffer, 0, len);
+							}
+							zos.closeEntry();
+							logger.info("Zip file : %s%n", file);
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							FileUtils.forceDelete(file.toFile());
+							logger.info("Deleting file : %s%n", file);
+						}
+						return FileVisitResult.CONTINUE;
+					}
+
+					@Override
+					public FileVisitResult visitFileFailed(Path file, IOException exc) {
+						logger.error("Unable to zip : %s%n%s%n", file, exc);
+						return FileVisitResult.CONTINUE;
+					}
+				});
+			} catch (Exception e) {
+				logger.error("Unable to zip : %s%n", e);
+			}
+		}
 	}
 
 }

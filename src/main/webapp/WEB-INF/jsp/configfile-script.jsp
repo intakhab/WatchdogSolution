@@ -188,6 +188,16 @@ $(document).ready(function() {
 		}
 	});
     
+    $("#reportsId").click(function(e) {
+		if ($('#reportsId').prop('checked')) {
+			$('#isReportsDiv').show();
+			$('#reportsCronId').prop('required',true);
+		} else {
+			$('#isReportsDiv').hide();
+		    $('#reportsCronId').prop('required',false);
+		}
+	});
+    
   
     
     $('#submitButtonId').click(function () {
@@ -423,6 +433,10 @@ function isCronChange(){
 		changeFound=true; 
 		confirmMsg(" Auto Pilot ")
 	}
+	if($("#reportsTimeId").val()!=$("#reportsCronId").val()){
+		changeFound=true; 
+		confirmMsg(" Reports ")
+	}
 	
    return changeFound;
 }
@@ -486,8 +500,16 @@ $(window).bind("load", function() {
 			$('#autoPilotCronId').prop('required',true);
 		} else {
 			$('#isAutoPilotDiv').hide();
-			//$('#toWhomEmailId').val("");
 		    $('#autoPilotCronId').prop('required',false);
+		}
+	}
+	if($("#reportsId").val()=="true"){
+		if ($('#reportsId').prop('checked')) {
+			$('#isReportsDiv').show();
+			$('#reportsCronId').prop('required',true);
+		} else {
+			$('#isReportsDiv').hide();
+		    $('#reportsCronId').prop('required',false);
 		}
 	}
 	

@@ -35,6 +35,7 @@ public class SettingsInfoDto {
 	private boolean stopBatchRun = false;
 	private boolean stopNonEdiBatchRun = false;
 	private boolean stopBulkBatchRun = false;
+	private boolean stopFBPayRun =false;
 
 	private String nonEdiCamFileSupports = "";
 	private String nonEdiCamInputFolderPath = "";
@@ -86,8 +87,11 @@ public class SettingsInfoDto {
 	private String fromMail = "noreply@cbrands.com";
 	private boolean debugMail = false;
 	private boolean autoPilot = false;
+	private boolean autoReports=false;
+	
 	private String autoPilotCron = "00 00 05 * * *";// Five O'clock Morning default
-    
+	private String reportsCron = "00 00 18 * * *";// Six O'clock Morning default
+
 	
 
 	/********************************************************************************/
@@ -641,6 +645,30 @@ public class SettingsInfoDto {
 
 	public void setBulkPoollingTimeG2(String bulkPoollingTimeG2) {
 		this.bulkPoollingTimeG2 = bulkPoollingTimeG2;
+	}
+
+	public boolean isAutoReports() {
+		return autoReports;
+	}
+
+	public void setAutoReports(boolean autoReports) {
+		this.autoReports = autoReports;
+	}
+
+	public String getReportsCron() {
+		return reportsCron;
+	}
+
+	public void setReportsCron(String reportsCron) {
+		this.reportsCron = reportsCron;
+	}
+
+	public boolean isStopFBPayRun() {
+		return stopFBPayRun;
+	}
+
+	public void setStopFBPayRun(boolean stopFBPayRun) {
+		this.stopFBPayRun = stopFBPayRun;
 	}
 
 }

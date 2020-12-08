@@ -406,6 +406,26 @@
                   </div>
                   <!-- Start Tab 3 -->
 				<div id="fileConfigId" class="tab-pane">
+				
+				        <div>
+					        <nav aria-label="breadcrumb">
+									<ol class="breadcrumb">
+										<li><a href="javascript:void()"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Reports</a></li>
+									</ol>
+					    	</nav>
+ 					     <form:checkbox path="autoReports" class="form-check-input" id="reportsId"/>
+ 					     <label class="form-check-label" for="autoPilotIdLbl">Enable Reports</label>
+ 					
+						 <div id="isReportsDiv">
+	  							<small id="dd" class="form-text text-muted"><span style="color:blue">Reports will auto send per day</span>(<span style="color:red"> [second, minute, hour, day, month, weekday ex  00 05 21 * * * </span>)</small>	
+								<div class="input-group" >
+	    					    <span class="input-group-addon">Reports Cron&nbsp;</span>
+	   						    <form:input id="reportsCronId" type="text" class="form-control msgc" path="reportsCron" placeholder="Additional Info" required="required" />
+	  					    </div>
+  					     </div>
+					       <br/>
+					       <br/>
+					 </div>
 				      <div>
 					        <nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
@@ -413,12 +433,12 @@
 									</ol>
 					    	</nav>
  					     <form:checkbox path="autoPilot" class="form-check-input" id="autoPilotId"/>
- 					     <label class="form-check-label" for="autoPilotIdLbl">Enable Auto Pilot</label>
+ 					     <label class="form-check-label" for="autoPilotIdLbl">Enable Auto Pilot</label> <small id="dd" class="form-text text-muted"><span style="color:blue">(it will archives all processed file from Output, Failure and Archive folder as a zip in Temp Folder)</span></small>
  					
 						 <div id="isAutoPilotDiv">
 	  							<small id="dd" class="form-text text-muted"><span style="color:blue">Auto Pilot will automatically Restart WatchDog in given time interval</span>(<span style="color:red"> [second, minute, hour, day, month, weekday ex  00 05 21 * * * </span>)</small>	
 								<div class="input-group" >
-	    					    <span class="input-group-addon">Auto Pilot&nbsp;</span>
+	    					    <span class="input-group-addon">Auto Pilot Cron&nbsp;</span>
 	   						    <form:input id="autoPilotCronId" type="text" class="form-control msgc" path="autoPilotCron" placeholder="Additional Info" required="required" />
 	  					    </div>
   					     </div>
@@ -572,7 +592,7 @@
 					
 					</div>
 					<div class="form-row row">
-					    <div class="form-group col-md-3">
+					    <div class="form-group col-md-2">
 							<label for="stopFileRun">File Batch</label>
 							<form:select path="stopFileRun" class="form-control"
 								id="stopFileRunId">
@@ -581,6 +601,17 @@
 							</form:select>
 						<small id="tt" class="form-text text-muted">Start/Stop</small>	
 						</div>
+						<div class="form-group col-md-2">
+							<label for="stopFileRun">FB Pay</label>
+							<form:select path="stopFBPayRun" class="form-control"
+								id="stopFBPayRunId">
+								<form:option value="true">Stop</form:option>
+								<form:option value="false">Start</form:option>
+							</form:select>
+						<small id="tt" class="form-text text-muted">Start/Stop</small>	
+						</div>
+						
+						
 						<div class="form-group col-md-2">
 							<label for="stopSoBatchRun">SO Batch</label>
 							<form:select path="stopSoBatchRun" class="form-control"
@@ -609,7 +640,7 @@
 							</form:select>
 						<small id="tt" class="form-text text-muted">Start/Stop</small>	
 						</div>
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-2">
 							<label for="stopBulkBatchRun">Bulk Batch</label>
 							<form:select path="stopBulkBatchRun" class="form-control"
 								id="stopBulkBatchId">
@@ -716,6 +747,7 @@
 	   						   <input type="hidden" id="bulkPoollingTimeG2Id" value="${infoObj.bulkPoollingTimeG2}"/>
 	   						   
 	   				           <input type="hidden" id="autoPilotTimeId" value="${infoObj.autoPilotCron}"/>
+	   				           <input type="hidden" id="reportsTimeId" value="${infoObj.reportsCron}"/>
 	   				           
 	   				           
 	   				           

@@ -65,6 +65,7 @@ import com.hcl.dog.domain.DogErrorResponse;
 import com.hcl.dog.domain.Reports;
 import com.hcl.dog.dto.ErrorDto;
 import com.hcl.dog.dto.FileDto;
+import com.hcl.dog.dto.MailDto;
 import com.hcl.dog.dto.PlanDescriptionDto;
 import com.hcl.dog.dto.ReportDto;
 import com.hcl.dog.dto.ResponseDto;
@@ -99,6 +100,8 @@ public class CommonService {
 	@Autowired
 	private XMLUtilService xmlUtilService;
 
+	@Autowired
+	private PrepMailService prepMailService;
 	
 
 	/**
@@ -225,7 +228,7 @@ public class CommonService {
 	 */
 	private String printFileTime(FileTime fileTime) {
 		try {
-			return AppUtil.dateFormat.format(fileTime.toMillis());
+			return AppUtil.dfDDMMYYYYhhmmss.format(fileTime.toMillis());
 		} catch (Exception e) {
 			return "" + System.currentTimeMillis();
 		}
@@ -1245,7 +1248,10 @@ public class CommonService {
 				logger.error(msg);
 				writelogFile(msg, "CISAgent_" + AppUtil.currentTime());
 				process.destroyForcibly();
+				
+				
 				//
+				
 			} else {
 				logger.info("Process Done!!! ");
 				resDto.setCommandRun(true);
@@ -1258,22 +1264,42 @@ public class CommonService {
 		}
 		return resDto;
 	}
+	
+	/***
+	 * Auto pilot mail
+	 */
+	private void commandLineFailMail(String filePath ) {
+				String subject = "TMS CISAgent Error";
+				String message = "TMS CISAgent found error, please validate attached file or see the logs file";
+				try {
+
+					MailDto mailDto = new MailDto(dataLoader.configDto.getFromMail(), 
+							dataLoader.configDto.getToWhomEmail(), subject, message);
+					mailDto.setFileURL(Paths.get(filePath).toFile());
+					prepMailService.sendEmailTemplate(mailDto);
+					
+				} catch (Exception e) {
+					logger.error("Exception {autoPilotMail} " + e.getMessage());
+
+				}
+	}
 
 	/***
 	 * This method will write the file in logs directory with given content in
 	 * string
-	 * 
 	 * @param data
 	 *            {@link String}
 	 * @param filename
 	 *            {@link String}
 	 */
-	public void writelogFile(String data, String filename) {
-
+	public String writelogFile(String data, String filename) {
 		final String filePath = env.getProperty("logs.dir") + File.separator + "Error_"
 				+ FilenameUtils.getBaseName(filename) + ".log";
 		logger.info("Writing file in error folder with name [ " + filePath + "]");
 		writeFile(data, filePath);
+		commandLineFailMail(filePath);//Sending mail....when get any error in command line
+		
+		return filePath;
 	}
 
 	/***

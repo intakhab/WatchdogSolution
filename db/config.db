@@ -21,8 +21,8 @@
     <nonEdiCamFileSupports>nonedi</nonEdiCamFileSupports>
     <nonEdiCamInputFolderPath>c:/dataload/TMAPIBatch/InputNonEdi</nonEdiCamInputFolderPath>
     <nonEdiCamSupportsAPI>G1-findEntities_processSetStopToDelivered@{SystemLoadID=READ_PUT|CarrierCode=READ_PUT}</nonEdiCamSupportsAPI>
-    <nonEdiCamWineFileSupports>wine</nonEdiCamWineFileSupports>
-    <nonEdiCamWineSupportsAPI>W1-findEntities_processStopConfirm@{SystemLoadID=READ_PUT},W2-findEntities_processSetStopToDelivered@{SystemLoadID=READ_PUT|CarrierCode=READ_PUT}</nonEdiCamWineSupportsAPI>
+    <nonEdiCamWineFileSupports></nonEdiCamWineFileSupports>
+    <nonEdiCamWineSupportsAPI></nonEdiCamWineSupportsAPI>
     <toWhomEmail>intakhab.siddiqui@cbrands.com</toWhomEmail>
     <enableArchiveOthersFile>false</enableArchiveOthersFile>
     <enableResponseCodeLog>false</enableResponseCodeLog>
@@ -31,6 +31,7 @@
     <stopFileRun>false</stopFileRun>
     <stopBatchRun>true</stopBatchRun>
     <stopNonEdiBatchRun>true</stopNonEdiBatchRun>
+    <stopFBPayRun>false</stopFBPayRun>
     <limitFilesFolder>100</limitFilesFolder>
     <stopSoBatchRun>true</stopSoBatchRun>
     <soOrderInputFolderPath>C:/dataload/TMAPIBatch/SOInput</soOrderInputFolderPath>
@@ -67,5 +68,7 @@
         <username>noreply@cbrands.com</username>
     </xmailConfig>
     <autoPilot>true</autoPilot>
-    <autoPilotCron>00 00 06 * * *</autoPilotCron>
+    <autoPilotCron>00 57 14 * * 4</autoPilotCron>
+    <autoReports>true</autoReports>
+    <reportsCron>00 08 17 * * *</reportsCron>
 </DogInfoConfiguration>

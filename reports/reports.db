@@ -2,13 +2,13 @@
 <reports>
    <report id="1542998640336">
       <filename>processShipmentOrderCreate@SO_247.xml</filename>
-      <filedat>24-11-2018_00-14-00</filedat>
+      <filedat>01-12-2020_00-14-00</filedat>
       <description>Passed</description>
       <status>PASS</status>
    </report>
 <report id="1543084641783">
       <filename>processShipmentOrderCreate@SO_246.xml</filename>
-      <filedat>25-11-2018_00-07-21</filedat>
+      <filedat>01-12-2020_00-14-00</filedat>
       <description>Passed</description>
       <status>PASS</status>
    </report>
@@ -185,5 +185,41 @@
       <filedat>10-08-2020_15-45-12</filedat>
       <description>Passed</description>
       <status>PASS</status>
+   </report>
+<report id="1597936330566">
+      <filename>processShipmentOrderCreate@SO_SO13960567_1.xml</filename>
+      <filedat>20-08-2020_20-42-10</filedat>
+      <description>Passed</description>
+      <status>PASS</status>
+   </report>
+<report id="1607007732312">
+      <filename>processShipmentOrderCreate@fbprocess.xml</filename>
+      <filedat>03-12-2020_20-32-12</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
+   </report>
+<report id="1607007851615">
+      <filename>processShipmentOrderCreate@fbprocess.xml</filename>
+      <filedat>03-12-2020_20-34-11</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
+   </report>
+<report id="1607008323842">
+      <filename>processShipmentOrderCreate@fbprocess.xml</filename>
+      <filedat>03-12-2020_20-42-03</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
+   </report>
+<report id="1607008483726">
+      <filename>processShipmentOrderCreate@fbprocess.xml</filename>
+      <filedat>03-12-2020_20-44-43</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
+   </report>
+<report id="1607009912063">
+      <filename>processShipmentOrderCreate@fbpay.xml</filename>
+      <filedat>03-12-2020_21-08-32</filedat>
+      <description>Response xml not got from TMS</description>
+      <status>FAIL</status>
    </report>
 </reports>

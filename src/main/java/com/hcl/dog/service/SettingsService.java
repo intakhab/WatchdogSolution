@@ -94,6 +94,7 @@ public class SettingsService {
 		settingInfo.setNonEdiCamWineSupportsAPI(arrayModification(settingInfoDto.getNonEdiCamWineSupportsAPI()));
 		settingInfo.setNonEdiCamInputFolderPath(settingInfoDto.getNonEdiCamInputFolderPath());
 		settingInfo.setStopFileRun(settingInfoDto.isStopFileRun());
+		settingInfo.setStopFBPayRun(settingInfoDto.isStopFBPayRun());
 		settingInfo.setStopBatchRun(settingInfoDto.isStopBatchRun());
 		settingInfo.setStopNonEdiBatchRun(settingInfoDto.isStopNonEdiBatchRun());
 		settingInfo.setLimitFilesFolder(settingInfoDto.getLimitFilesFolder());
@@ -140,6 +141,9 @@ public class SettingsService {
 		
 		settingInfo.setAutoPilot(settingInfoDto.isAutoPilot());
 		settingInfo.setAutoPilotCron(settingInfoDto.getAutoPilotCron());
+		//New changes as per new requirement
+		settingInfo.setAutoReports(settingInfoDto.isAutoReports());
+		settingInfo.setReportsCron(settingInfoDto.getReportsCron());
 	
 		return settingInfo;
 	}
@@ -201,6 +205,7 @@ public class SettingsService {
 			sInfoDto.setNonEdiCamWineFileSupports(wdInfo.getNonEdiCamWineFileSupports());
 			sInfoDto.setNonEdiCamWineSupportsAPI(wdInfo.getNonEdiCamWineSupportsAPI().split(AppUtil.COMMA_SEPERATOR));
 			sInfoDto.setStopFileRun(wdInfo.isStopFileRun());
+			sInfoDto.setStopFBPayRun(wdInfo.isStopFBPayRun());
 			sInfoDto.setStopBatchRun(wdInfo.isStopBatchRun());
 			sInfoDto.setStopNonEdiBatchRun(wdInfo.isStopNonEdiBatchRun());
 			sInfoDto.setLimitFilesFolder(wdInfo.getLimitFilesFolder());
@@ -273,6 +278,9 @@ public class SettingsService {
 			//Auto Pilot
 			sInfoDto.setAutoPilot(wdInfo.isAutoPilot());
 	        sInfoDto.setAutoPilotCron(wdInfo.getAutoPilotCron().isEmpty()?sInfoDto.getAutoPilotCron():wdInfo.getAutoPilotCron());
+	        //New changes
+	        sInfoDto.setAutoReports(wdInfo.isAutoReports());
+	        sInfoDto.setReportsCron(wdInfo.getReportsCron().isEmpty()?sInfoDto.getReportsCron():wdInfo.getReportsCron());
 
 		return sInfoDto;
 	}

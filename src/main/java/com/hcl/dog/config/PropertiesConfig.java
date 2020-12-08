@@ -37,6 +37,11 @@ public class PropertiesConfig {
 	
 	//public String versionId="06032019-V-3.1";// PlanID Empty-mail shoot
 	
-	public String versionId="10082020-V-3.3";// PlanID Failure mail shoot
+	//public String versionId="10082020-V-3.3";// PlanID Failure mail shoot
+	
+	//public String versionId="07092020-V-3.4";// Wine Job is closed from setting NonEdiComponent check
+	
+	 public String versionId="04122020-V-4.0";// Major changes, new functionality added, reporting and autopilot will take backup
+	
 		
 }

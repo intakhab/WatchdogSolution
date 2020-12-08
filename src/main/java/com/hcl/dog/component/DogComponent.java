@@ -69,7 +69,7 @@ public class DogComponent {
     
 	/**
 	 * @see Bean
-	 * @return pollingtime {@link String}
+	 * @return polling time {@link String}
 	 */
     
     @Bean
@@ -167,11 +167,20 @@ public class DogComponent {
 					  }
 					  // if FBpay file will come then it will move to 
 					  if(checkFBPayFiles(f)) {
+						  if(!validateFBPayRun()) {
+							  return;
+						  }
 						  logger.info("FBPay File found in input directory, Moving to FBPay Folder for further Processing {}");
 						  String fbFileName=dataLoader.configDto.getFbPayInputFolderPath()+File.separator+fileName;
 						  commonService.moveReplaceFile(f.getPath(), fbFileName);
+						  
 						  logger.info("File Moved to FBPay folder, It will be backed in input folder after processing done {} ");
-						  boolean b=fbPayService.processFBPay(f,Paths.get(fbFileName).toFile(),FBPAY, count);
+							boolean b = false;
+							try {
+								b = fbPayService.processFBPay(f, Paths.get(fbFileName).toFile(), FBPAY, count);
+							} catch (Exception e) {
+							}
+						 
 						  if(b) {
 							  logger.info("FBPay file Come back to input folder successfully, will satrt further processing {} ");
 						  }else {
@@ -231,6 +240,18 @@ public class DogComponent {
 		} catch (Exception e) {
 			
 		}
+	}
+	
+	public boolean validateFBPayRun() {
+		if (dataLoader.configDto != null && !dataLoader.configDto.getFlag()) {
+			logger.info("Please configure setting, Watch Dog will start once configuration setting done {} ");
+			return false;
+		}
+		if (dataLoader.configDto != null && dataLoader.configDto.isStopFBPayRun()) {
+			logger.info("FBPay is stoped. For starting reconfigure settings {} ");
+			return false;
+		}
+		return true;
 	}
 }
 
