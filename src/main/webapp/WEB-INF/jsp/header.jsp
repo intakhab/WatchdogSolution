@@ -59,6 +59,8 @@
 			          <li><a href="responseout" title="TMS Response files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Response File </a></li>
 			          <li><a href="archiveout" title="All Process files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Archive File </a></li>
 			          <li><a href="failuredir" title="Failure files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Failure File </a></li>
+			          <li><a href="backupdir" title="All Backup files will be shown here in zip format"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Backup Folder </a></li>
+			          
 			        </ul>
 			     </li>
 			     

@@ -81,8 +81,8 @@ public class AutoReportsComponent {
 	 * Auto pilot mail
 	 */
 	private void autoReportsMail(List<Report> rList) {
-				String subject = "TMS Processed File Summary for Today's date";
-				String message = "TMS Processed Summary for Todays's date";
+				String subject = "TMS Reports Summary for Today's Date";
+				String message = "TMS Processed File Reports Summary for Today's Date";
 				try {
 
 					MailDto mailDto = new MailDto(dataLoader.configDto.getFromMail(), 

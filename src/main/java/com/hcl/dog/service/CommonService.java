@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
-import java.nio.file.DirectoryStream;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -89,8 +88,6 @@ public class CommonService {
 
 	private final Logger logger = LogManager.getLogger("comon-serv");
 
-	
-	
 	@Autowired
 	private Environment env;
 	@Autowired
@@ -99,7 +96,6 @@ public class CommonService {
 	private PropertiesConfig propertiesConfig;
 	@Autowired
 	private XMLUtilService xmlUtilService;
-
 	@Autowired
 	private PrepMailService prepMailService;
 	
@@ -161,7 +157,8 @@ public class CommonService {
 		List<FileDto> fileDtoList = new ArrayList<>();
 		AtomicInteger counter = new AtomicInteger(0);
 
-		try (DirectoryStream<Path> files = Files.newDirectoryStream(dir)) {
+		//try (DirectoryStream<Path> files = Files.newDirectoryStream(dir)) {
+		try (Stream<Path> files = Files.walk(dir)) {
 			StreamSupport.stream(files.spliterator(), false).sorted((o1, o2) -> {
 				try {
 					return Files.getLastModifiedTime(o2).compareTo(Files.getLastModifiedTime(o1));
@@ -202,7 +199,8 @@ public class CommonService {
 		final String reportsPath = env.getProperty("reports.path").split("/")[0];
 		Path dir = FileSystems.getDefault().getPath(reportsPath);
 		List<String> dirList = new ArrayList<>();
-		try (DirectoryStream<Path> files = Files.newDirectoryStream(dir)) {
+		//try (DirectoryStream<Path> files = Files.newDirectoryStream(dir)) {
+		try (Stream<Path> files = Files.walk(dir)) {
 			StreamSupport.stream(files.spliterator(), false).sorted((o2, o1) -> {
 				try {
 					return Files.getLastModifiedTime(o1).compareTo(Files.getLastModifiedTime(o2));
@@ -331,9 +329,6 @@ public class CommonService {
 		AppUtil.createFolder(dataLoader.configDto.getSoOrderInputFolderPath(), "SO Folder");
 		AppUtil.createFolder(dataLoader.configDto.getFbPayInputFolderPath(), "FBPay");
 		AppUtil.createFolder(dataLoader.configDto.getBulkInputFolderPath(), "BULK");
-
-		//
-
 	}
 
 	/***
@@ -410,7 +405,7 @@ public class CommonService {
 	}
 
 	/**
-	 * This method will copy and replace file
+	 * This method will copy and replace filec
 	 * 
 	 * @param src
 	 *            {@link String}
@@ -561,6 +556,12 @@ public class CommonService {
 			logger.info("Backup folder Empty {} ");
 		}
 
+	}
+	
+	
+	public String  getTempFolderPath() {
+		Path pp=Paths.get(dataLoader.configDto.getInputFolderPath());
+		return pp.getRoot()+""+pp.subpath(0, 2)+"/"+AppUtil.CLEAN_UP_FOLDER_NAME;
 	}
 
 	/**

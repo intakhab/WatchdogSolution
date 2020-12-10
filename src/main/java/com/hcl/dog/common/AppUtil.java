@@ -92,6 +92,7 @@ public class AppUtil {
 	public static  final String SUCCESS_MSG = "Successfull run APIs";
 
 	public static  final String FILE_INTERNAL_PROBLEM = "File having internal Problem";
+	public static final String CLEAN_UP_FOLDER_NAME = "Temp";
 
 	public static  String STARTED_TIME = "";
 
@@ -236,24 +237,24 @@ public class AppUtil {
 								zos.write(buffer, 0, len);
 							}
 							zos.closeEntry();
-							logger.info("Zip file : %s%n", file);
+							logger.info("Zip file =>", file);
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
 							FileUtils.forceDelete(file.toFile());
-							logger.info("Deleting file : %s%n", file);
+							logger.info("Deleting file =>", file);
 						}
 						return FileVisitResult.CONTINUE;
 					}
 
 					@Override
 					public FileVisitResult visitFileFailed(Path file, IOException exc) {
-						logger.error("Unable to zip : %s%n%s%n", file, exc);
+						logger.error("Unable to zip ", file, exc);
 						return FileVisitResult.CONTINUE;
 					}
 				});
 			} catch (Exception e) {
-				logger.error("Unable to zip : %s%n", e);
+				logger.error("Unable to zip =>", e);
 			}
 		}
 	}

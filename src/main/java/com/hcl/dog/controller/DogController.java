@@ -498,15 +498,24 @@ public class DogController {
 	 * @return {@link String}
 	 */
 	@RequestMapping("/failuredir")
-	public ModelAndView failureDir(HttpServletRequest httpRequest) {
-		ModelAndView mav = new ModelAndView();
+	public String failureDir(HttpServletRequest httpRequest, ModelMap model) {
 		List<FileDto> fileDtoList = commonService.loadFiles(dataLoader.configDto.getFailureFolderPath(),
 				Integer.valueOf(dataLoader.configDto.getLimitFilesFolder()));
 		String errorMsg = httpRequest.getParameter("msg");
-		mav.addObject("msg", errorMsg);
-		mav.addObject("fileList", fileDtoList);
-		mav.setViewName("failuredir");
-		return mav;
+		model.addAttribute("msg", errorMsg);
+		model.addAttribute("fileList", fileDtoList);
+		return "failuredir";
+	}
+
+	
+	@RequestMapping("/backupdir")
+	public String backupDir(HttpServletRequest httpRequest, ModelMap model) {
+		List<FileDto> fileDtoList = commonService.loadFiles(commonService.getTempFolderPath(),
+				Integer.valueOf(dataLoader.configDto.getLimitFilesFolder()));
+		String errorMsg = httpRequest.getParameter("msg");
+		model.addAttribute("msg", errorMsg);
+		model.addAttribute("fileList", fileDtoList);
+		return "backupdir";
 	}
 
 	/***
@@ -515,13 +524,12 @@ public class DogController {
 	 * @return failuredircontent {@link String}
 	 */
 	@RequestMapping("/failuredircontent")
-	public ModelAndView failureDirContent(HttpServletRequest httpRequest) {
+	public String failureDirContent(HttpServletRequest httpRequest,ModelMap model) {
 		ModelAndView mav = new ModelAndView();
 		List<FileDto> fileDtoList = commonService.loadFiles(dataLoader.configDto.getFailureFolderPath(),
 				Integer.valueOf(dataLoader.configDto.getLimitFilesFolder()));
 		mav.addObject("fileList", fileDtoList);
-		mav.setViewName("failuredircontent");
-		return mav;
+		return "failuredircontent";
 	}
 
 	/***
@@ -567,9 +575,12 @@ public class DogController {
 			case "fail":
 				filetoDownload = dataLoader.configDto.getFailureFolderPath();
 				break;
+			case "temp":
+				filetoDownload = commonService.getTempFolderPath();
+				break;
 			case "logs":
 				filetoDownload = env.getProperty("logs.dir");
-				break;
+				break;	
 			default:
 				break;
 			}

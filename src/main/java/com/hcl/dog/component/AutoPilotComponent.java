@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 import com.hcl.WatchDogSolution;
 import com.hcl.dog.common.AppUtil;
 import com.hcl.dog.dto.MailDto;
-import com.hcl.dog.service.PrepMailService;
 import com.hcl.dog.service.CommonService;
+import com.hcl.dog.service.PrepMailService;
 
 /***
  * @author intakhabalam.s@hcl.com
@@ -52,13 +52,14 @@ public class AutoPilotComponent {
 	private Environment env;
 
 	
-	private final String CLEAN_UP_FOLDER_NAME="Temp";
+	
 
 	@Bean
 	public String autoPilotCron() {
 		return dataLoader.configDto.getAutoPilotCron();
 	}
 
+   
 	/***
 	 * Auto
 	 */
@@ -83,25 +84,22 @@ public class AutoPilotComponent {
 		try {
 			// Backup all file in particular folder....
 			try {
-				if(AppUtil.TRUE_STR.equalsIgnoreCase(env.getProperty("auto.pilot.folder.cleanup"))) {
-				Path pp=Paths.get(dataLoader.configDto.getInputFolderPath());
-				String tempFolder=pp.getRoot()+""+pp.subpath(0, 2)+"/"+CLEAN_UP_FOLDER_NAME;
-				logger.info("TempFolder path==>"+tempFolder);
-				AppUtil.createFolder(tempFolder,CLEAN_UP_FOLDER_NAME);
-				Path [] sPath = {
-						Paths.get(dataLoader.configDto.getOutputFolderPath()),
-						Paths.get(dataLoader.configDto.getArchiveFolderPath()),
-						Paths.get(dataLoader.configDto.getFailureFolderPath())
-						};
-				
-				AppUtil.zipFolder(tempFolder, sPath);
-				logger.info("Clean Up Completed - All file archive to folder : "+CLEAN_UP_FOLDER_NAME);
+				if (AppUtil.TRUE_STR.equalsIgnoreCase(env.getProperty("auto.pilot.folder.cleanup"))) {
+					String tempFolder = commonService.getTempFolderPath();
+					logger.info("TempFolder path==>" + tempFolder);
+					AppUtil.createFolder(tempFolder, AppUtil.CLEAN_UP_FOLDER_NAME);
+					Path[] sPath = { Paths.get(dataLoader.configDto.getOutputFolderPath()),
+							Paths.get(dataLoader.configDto.getArchiveFolderPath()),
+							Paths.get(dataLoader.configDto.getFailureFolderPath()) };
 
-				}else {
+					AppUtil.zipFolder(tempFolder, sPath);
+					logger.info("Clean Up Completed - All file archive to folder : " + tempFolder);
+
+				} else {
 					logger.info("Auto Pilot Cleanup functionality is disabled, for enable change in properties file");
 				}
 			}catch(Exception e) {
-				logger.error("Clean error {}", e);
+				logger.error("Clean up error {}", e);
 
 			}
 			
