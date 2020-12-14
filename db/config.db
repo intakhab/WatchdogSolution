@@ -70,5 +70,5 @@
     <autoPilot>true</autoPilot>
     <autoPilotCron>00 57 14 * * 4</autoPilotCron>
     <autoReports>true</autoReports>
-    <reportsCron>00 08 17 * * *</reportsCron>
+    <reportsCron>00 29 19 * * *</reportsCron>
 </DogInfoConfiguration>
