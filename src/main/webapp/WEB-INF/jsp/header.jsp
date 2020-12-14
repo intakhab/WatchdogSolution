@@ -43,17 +43,17 @@
 			        <i class="fa fa-expand" aria-hidden="true"></i> Input Folder
 			        <span class="caret"></span></a>
 			        <ul class="dropdown-menu mfont">
-			          <li><a href="inputdir"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; File </a></li>
-			          <li><a href="inputdirfin"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Fin </a></li>
-			          <li><a href="inputdirfbpay"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; FBPay </a></li>
-			    	  <li><a href="inputdirso"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; SO  </a></li>
-			          <li><a href="inputdirnonedi"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; NEdi</a></li>
-			          <li><a href="inputdirbulk"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; BLK</a></li>
+			          <li><a href="inputdir" title="TMS Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; File </a></li>
+			          <li><a href="inputdirfin" title="Financial API Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Fin </a></li>
+			          <li><a href="inputdirfbpay" title="FBPay Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; FBPay </a></li>
+			    	  <li><a href="inputdirso" title="SO Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; SO  </a></li>
+			          <li><a href="inputdirnonedi" title="NON-EDI Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; NEdi</a></li>
+			          <li><a href="inputdirbulk" title="BULK Input files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; BLK</a></li>
 			        </ul>
 			     </li>
 			     <li class="dropdown" id="tab4">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" title="Will show all processed files from TMS">
-			        <i class="fa fa-expand" aria-hidden="true"></i> Output File
+			        <i class="fa fa-expand" aria-hidden="true"></i> Output Folder
 			        <span class="caret"></span></a>
 			        <ul class="dropdown-menu mfont">
 			          <li><a href="responseout" title="TMS Response files will be shown here"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp; Response File </a></li>

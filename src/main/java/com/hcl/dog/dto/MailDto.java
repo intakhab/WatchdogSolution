@@ -57,6 +57,14 @@ public class MailDto {
 		this.to.addAll(Arrays.asList(splitByComma(toList)));
 		this.cc.addAll(Arrays.asList(splitByComma(ccList)));
 	}
+	
+	public MailDto(String from, String ccList, String subject, String message,boolean cc) {
+		this();
+		this.from = from;
+		this.subject = subject;
+		this.message = message;
+		this.cc.addAll(Arrays.asList(splitByComma(ccList)));
+	}
 
 	/**
 	 * @return the from

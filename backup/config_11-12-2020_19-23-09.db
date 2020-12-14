@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DogInfoConfiguration>
+    <dogId>1</dogId>
+    <batchFilePath>C:/dataload/TMAPIBatch/BatchFile/watchDog.bat</batchFilePath>
+    <inputFolderPath>C:/dataload/TMAPIBatch/Input1</inputFolderPath>
+    <outputFolderPath>C:/dataload/TMAPIBatch/Output1</outputFolderPath>
+    <failureFolderPath>C:/dataload/TMAPIBatch/Failure1</failureFolderPath>
+    <archiveFolderPath>C:/dataload/TMAPIBatch/Archive1</archiveFolderPath>
+    <carrierCodeTag>CarrierCode</carrierCodeTag>
+    <responeCodeTag>CompletedSuccessfully</responeCodeTag>
+    <fileExtension>xml</fileExtension>
+    <fileTypeSeparator>@</fileTypeSeparator>
+    <responseFilePrefix>Out_</responseFilePrefix>
+    <fileSupports>cam,dc,so,edi,ssc,shipload,fbpay,fbprocess</fileSupports>
+    <supportsAPI>cam=changeEntity,dc=changeEntity,so=processShipmentOrderUpdate</supportsAPI>
+    <dogType>FD</dogType>
+    <optInputFolderPath>c:/dataload/TMAPIBatch/Fin</optInputFolderPath>
+    <soaOutputFolderPath>c:/dataload/TMAPIBatch/SOA</soaOutputFolderPath>
+    <optFileSupports>csi</optFileSupports>
+    <optSupportsAPI>G1-processScheduleRunRequest@{ScheduleRunTypeEnumVal=SRT_APVCHR|RequestID=AUTO_NUM},G1-processScheduleRunRequest@{ScheduleRunTypeEnumVal=SRT_APACCR|RequestID=AUTO_NUM},G2-processGLTransactionRetrieve@{GLTransactionTypeEnumVal=GLTT_ACCRUAL|GLClassificationEnumVal=BLANK|GLClassificationEnumVal=BLANK},G3-processScheduleRunRequest@{ScheduleRunTypeEnumVal=SRT_APTRNC|RequestID=AUTO_NUM},G4-processGLTransactionRetrieve@{GLTransactionTypeEnumVal=GLTT_ACCRUAL_REVERSED|GLClassificationEnumVal=BLANK|GLClassificationEnumVal=BLANK}</optSupportsAPI>
+    <nonEdiCamFileSupports>nonedi</nonEdiCamFileSupports>
+    <nonEdiCamInputFolderPath>c:/dataload/TMAPIBatch/InputNonEdi</nonEdiCamInputFolderPath>
+    <nonEdiCamSupportsAPI>G1-findEntities_processSetStopToDelivered@{SystemLoadID=READ_PUT|CarrierCode=READ_PUT}</nonEdiCamSupportsAPI>
+    <nonEdiCamWineFileSupports></nonEdiCamWineFileSupports>
+    <nonEdiCamWineSupportsAPI></nonEdiCamWineSupportsAPI>
+    <toWhomEmail>intakhab.siddiqui@cbrands.com</toWhomEmail>
+    <enableArchiveOthersFile>false</enableArchiveOthersFile>
+    <enableResponseCodeLog>false</enableResponseCodeLog>
+    <enableMail>true</enableMail>
+    <flag>true</flag>
+    <stopFileRun>false</stopFileRun>
+    <stopBatchRun>true</stopBatchRun>
+    <stopNonEdiBatchRun>true</stopNonEdiBatchRun>
+    <stopFBPayRun>false</stopFBPayRun>
+    <limitFilesFolder>100</limitFilesFolder>
+    <stopSoBatchRun>true</stopSoBatchRun>
+    <soOrderInputFolderPath>C:/dataload/TMAPIBatch/SOInput</soOrderInputFolderPath>
+    <soOrderSupportsAPI>G1-processSelectForOptimization@{SystemPlanID=PUT},G2-processSendToOptimizer@{SystemPlanID=PUT}</soOrderSupportsAPI>
+    <enableStartupEmail>true</enableStartupEmail>
+    <enableShutdownEmail>true</enableShutdownEmail>
+    <fbPayFileSupports>fbprocess</fbPayFileSupports>
+    <fbPayInputFolderPath>C:/dataload/TMAPIBatch/FBPay</fbPayInputFolderPath>
+    <fbPaySupportsAPI>processUpdateFBPayStatus@{SystemFreightBillID=READ},findEntities@{SystemFreightBillID=PUT}</fbPaySupportsAPI>
+    <stopBulkBatchRun>true</stopBulkBatchRun>
+    <bulkSupportsAPI>G1-findEntities_processSetAllToPlanned@{SystemLoadID=READ_PUT|PlanID=READ_PUT},G2-findEntities_processStopConfirm@{SystemLoadID=READ_PUT|SystemLoadID=READ_PUT}</bulkSupportsAPI>
+    <bulkFileSupports>blk</bulkFileSupports>
+    <bulkInputFolderPath>Input/BLK-Input</bulkInputFolderPath>
+    <xcronConfig>
+        <bulkPoollingTimeG1>00 00 21 * * *</bulkPoollingTimeG1>
+        <bulkPoollingTimeG2>00 30 21 * * *</bulkPoollingTimeG2>
+        <filePollingTime>1</filePollingTime>
+        <finCronTimeG1>00 00 21 * * *</finCronTimeG1>
+        <finCronTimeG2>00 05 21 * * *</finCronTimeG2>
+        <finCronTimeG3>00 25 21 * * *</finCronTimeG3>
+        <finCronTimeG4>00 35 21 * * *</finCronTimeG4>
+        <nonEdiPoollingTimeG1>30</nonEdiPoollingTimeG1>
+        <nonEdiPoollingTimeW1>35</nonEdiPoollingTimeW1>
+        <nonEdiPoollingTimeW2>40</nonEdiPoollingTimeW2>
+        <soCronTimeG1>00 15 22 * * *</soCronTimeG1>
+        <soCronTimeG2>00 45 22 * * *</soCronTimeG2>
+    </xcronConfig>
+    <xmailConfig>
+        <debugMail>true</debugMail>
+        <fromMail>noreply@cbrands.com</fromMail>
+        <host>mail.cbrands.com</host>
+        <password></password>
+        <port>25</port>
+        <username>noreply@cbrands.com</username>
+    </xmailConfig>
+    <autoPilot>true</autoPilot>
+    <autoPilotCron>00 57 14 * * 4</autoPilotCron>
+    <autoReports>true</autoReports>
+    <reportsCron>00 22 17 * * *</reportsCron>
+</DogInfoConfiguration>

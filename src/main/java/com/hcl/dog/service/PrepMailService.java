@@ -68,7 +68,7 @@ public class PrepMailService{
 	
 	
 	/***
-	 * This method will prepare the APIS mail
+	 * This method will prepare the APIS mailge
 	 * @param apiDtoList {@link List}
 	 */
 	public void prepareAndSendAPIsMails(List<APIDto> apiDtoList) {
@@ -120,7 +120,7 @@ public class PrepMailService{
 	 */
 	public void prepareReportsAndSend(List<Report> reportsList,MailDto mDto) {
 		StringBuilder sb = new StringBuilder(AppUtil.EMPTY_STR);
-		
+		String orignalMsg=mDto.getMessage()!=null?mDto.getMessage().concat("<br/><br/><br/>"):"";
 		sb.append(
 				"<table border='1' cellpadding='10' style='border: 1px solid #000080;' width='100%'><tr bgcolor='#A9A9A9'>"
 				+ "<td> SNO </td><td> FILE NAME </td><td>  DESCRIPTION </td> <td> DATE </td> <td> STATUS </td></tr>");
@@ -133,7 +133,7 @@ public class PrepMailService{
 			index++;
 		}
 		sb.append("</table>");
-		mDto.setMessage(sb.toString());
+		mDto.setMessage(orignalMsg.concat(sb.toString()));
 		try {
 			sendEmailTemplate(mDto);
 			logger.info("Reports Email Sent successfully.");
